@@ -19,9 +19,10 @@ jobs:
         id: calver
         with:
           date_format: "%Y.%m.%d"
+          release_branch: main
           release: false
         env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Set Install Chart Version
         uses: mikefarah/yq@master
