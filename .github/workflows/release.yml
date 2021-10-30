@@ -20,6 +20,8 @@ jobs:
         with:
           date_format: "%Y.%m.%d"
           release: false
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Set Install Chart Version
         uses: mikefarah/yq@master
