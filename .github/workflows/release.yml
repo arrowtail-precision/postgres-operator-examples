@@ -14,6 +14,27 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Calver Release
+        uses: StephaneBour/actions-calver@v1.4
+        id: calver
+        with:
+          date_format: "%Y.%m.%d"
+          release: false
+
+      - name: Set Install Chart Version
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq eval -i '.version = strenv(VERSION)' 'helm/install/Chart.yaml'
+        env:
+          VERSION: ${{ steps.calver.outputs.release }}
+
+      - name: Set Cluster Chart Version
+        uses: mikefarah/yq@master
+        with:
+          cmd: yq eval -i '.version = strenv(VERSION)' 'helm/postgres/Chart.yaml'
+        env:
+          VERSION: ${{ steps.calver.outputs.release }}
+
       - name: Configure Git
         run: |
           git config user.name "$GITHUB_ACTOR"
