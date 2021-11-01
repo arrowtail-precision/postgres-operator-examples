@@ -14,38 +14,24 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Calver Release
-        uses: StephaneBour/actions-calver@v1.4
+      - name: Generate Build ID
         id: calver
-        with:
-          date_format: "%Y.%m.%d"
-          release_branch: main
-          release: false
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Set Install Chart Version
-        uses: mikefarah/yq@master
-        with:
-          cmd: yq eval -i '.version = strenv(VERSION)' 'helm/install/Chart.yaml'
-        env:
-          VERSION: ${{ steps.calver.outputs.release }}
-
-      - name: Set Cluster Chart Version
-        uses: mikefarah/yq@master
-        with:
-          cmd: yq eval -i '.version = strenv(VERSION)' 'helm/postgres/Chart.yaml'
-        env:
-          VERSION: ${{ steps.calver.outputs.release }}
-
-      - name: Configure Git
         run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          # run=$(( GITHUB_RUN_NUMBER % 10 ))
+          run=${GITHUB_RUN_NUMBER}
+          ts=$(date +%Y.%m.%d)
+          echo "::set-output name=BUILD_ID::${ts}-${run}"
 
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.2.1
+      - name: Publish Helm Charts
+        uses: stefanprodan/helm-gh-pages@master
         with:
-          charts_dir: helm
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
+          charts_dir: helm/install
+          chart_version: ${{ steps.calver.outputs.BUILD_ID }}
+
+      - name: Publish Helm Charts
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          charts_dir: helm/postgres
+          chart_version: ${{ steps.calver.outputs.BUILD_ID }}
