@@ -26,12 +26,5 @@ jobs:
         uses: stefanprodan/helm-gh-pages@master
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          charts_dir: helm/install
-          chart_version: ${{ steps.calver.outputs.BUILD_ID }}
-
-      - name: Publish Helm Charts
-        uses: stefanprodan/helm-gh-pages@master
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          charts_dir: helm/postgres
+          charts_dir: helm
           chart_version: ${{ steps.calver.outputs.BUILD_ID }}
