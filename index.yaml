@@ -1,6 +1,16 @@
 apiVersion: v1
 entries:
   pgo:
+  - apiVersion: v2
+    appVersion: 5.0.3
+    created: "2021-11-01T11:37:48.826891192Z"
+    description: A Helm chart for Kubernetes
+    digest: a8c29a1a7724f1cf82ed963443b49b2fe7f4931ce2e3c75dc0a52e00401859ad
+    name: pgo
+    type: application
+    urls:
+    - https://arrowtail-precision.github.io/postgres-operator-examples/pgo-2021.11.01-8.tgz
+    version: 2021.11.01-8
   - apiVersion: v3
     appVersion: 5.0.3
     created: "2021-10-30T04:00:26.899012759Z"
@@ -22,6 +32,16 @@ entries:
     - https://github.com/arrowtail-precision/postgres-operator-examples/releases/download/pgo-0.1.0/pgo-0.1.0.tgz
     version: 0.1.0
   postgrescluster:
+  - apiVersion: v2
+    appVersion: 5.0.3
+    created: "2021-11-01T11:37:48.829012632Z"
+    description: A Helm chart for Kubernetes
+    digest: aa8f81b8592b700b03dd3ee6e2cfc5b30137a032c23b792d56a746df1cd6ba31
+    name: postgrescluster
+    type: application
+    urls:
+    - https://arrowtail-precision.github.io/postgres-operator-examples/postgrescluster-2021.11.01-8.tgz
+    version: 2021.11.01-8
   - apiVersion: v3
     appVersion: 5.0.3
     created: "2021-10-30T04:00:27.088883441Z"
@@ -42,4 +62,4 @@ entries:
     urls:
     - https://github.com/arrowtail-precision/postgres-operator-examples/releases/download/postgrescluster-0.1.0/postgrescluster-0.1.0.tgz
     version: 0.1.0
-generated: "2021-10-30T04:00:27.088895641Z"
+generated: "2021-11-01T11:37:48.821103384Z"
