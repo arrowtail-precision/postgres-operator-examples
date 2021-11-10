@@ -19,8 +19,8 @@ jobs:
         run: |
           # run=$(( GITHUB_RUN_NUMBER % 10 ))
           run=${GITHUB_RUN_NUMBER}
-          ts=$(date +%Y.%m.%d)
-          echo "::set-output name=BUILD_ID::${ts}-${run}"
+          ts=$(date +%Y.%m%d)
+          echo "::set-output name=BUILD_ID::${ts}.${run}"
 
       - name: Publish Helm Charts
         uses: stefanprodan/helm-gh-pages@master
