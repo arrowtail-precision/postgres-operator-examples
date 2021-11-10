@@ -165,9 +165,80 @@
 # Backups / pgBackRest Settings #
 #################################
 
-# backupsSize sets the storage size of the backups to a PVC. This can be
-# overridden by "pgBackRestConfig", if set. Defaults to the value velow.
+# backupsSize sets the storage size of the backups to a volume in Kubernetes.
+# can be overridden by "pgBackRestConfig", if set. Defaults to the value velow.
 # backupsSize: 1Gi
+
+# s3 allows for AWS S3 or an S3 compatible storage system to be used for
+# backups. This allows for a quick setup with S3; if you need more advanced
+# setup, use pgBackRestConfig.
+# s3:
+#   # bucket specifies the S3 bucket to use,
+#   bucket: ""
+#   # endpoint specifies the S3 endpoint to use.
+#   endpoint: ""
+#   # region specifies the S3 region to use. If your S3 storage system does not
+#   # use "region", fill this in with a random vaule.
+#   region: ""
+#   # key is the S3 key. This is stored in a Secret.
+#   key: ""
+#   # keySecret is the S3 key secret. This is tored in a Secret.
+#   keySecret: ""
+#   # encryptionPassphrase is an optional parameter to enable encrypted backups
+#   # with pgBackRest. This is encrypted by pgBackRest and does not use S3's
+#   # built-in encrpytion system.
+#   encryptionPassphrase: ""
+
+# gcs allows for Google Cloud Storage (GCS) to be used for backups. This allows
+# for a quick setup with GCS; if you need a more advanced setup, use
+# "pgBackRestConfig".
+# gcs:
+#   # bucket is the name of the GCS bucket that the backups will be stored in.
+#   bucket: ""
+#   # key is a multi-line string that contains the GCS key, which is a JSON
+#   # structure.
+#   key: |
+#     {}
+
+# azure allows for Azure Blob Storage to be used for backups. This allows
+# for a quick setup with Azure Blob Storage; if you need a more advanced setup,
+# use "pgBackRestConfig".
+# azure:
+#   # account is the name of the Azure account to be used.
+#   account: ""
+#   # key is the Secret key used associated with the Azure acount.
+#   key: ""
+#   # container is the Azure container that the backups will be stored in.
+#   container: ""
+
+# multiBackupRepos allows for backing up to multiple repositories. This is
+# effectively uses the "quickstarts" for each of the backup types (volume, s3,
+# gcs, azure). You can have any permutation of these types. You can set up to 4.
+# can be overwritten by "pgBackRestConfig".
+#
+# You can't set "multiBackupRepos" and any of the individual quickstarts at the
+# same time. "multiBackupRepos" will take precedence.
+#
+# Below is an example that enables one of each backup type. Note all of the
+# available quickstart options are presented below; please see the backup types
+# if you want to see how each option works.
+# multiBackupRepos:
+# - volume:
+#     backupsSize: 1Gi
+# - s3:
+#     bucket: ""
+#     endpoint: ""
+#     region: ""
+#     key: ""
+#     keySecret: ""
+# - gcs:
+#     bucket: ""
+#     key: |
+#       {}
+# - azure:
+#     account: ""
+#     key: ""
+#     container: ""
 
 # pgBackRestConfig allows for the configuration of every pgBackRest option
 # except for "image", which is set by "pgBackRest".
