@@ -17,10 +17,10 @@ spec:
     spec:
       containers:
       - name: operator
-        image: "{{ .Values.image.repository }}/postgres-operator:{{ .Values.image.tag }}"
+        image: "{{ .Values.image.image }}"
         env:
         - name: CRUNCHY_DEBUG
-          value: "true"
+          value: {{ if eq .Values.debug false  }}"false"{{- else }}"true"{{- end }}
         {{- range  $image_name, $image_val := .Values.relatedImages }}
         - name: RELATED_IMAGE_{{ $image_name | upper }}
           value: "{{ $image_val.image }}"
@@ -29,4 +29,8 @@ spec:
         - name: PGO_TARGET_NAMESPACE
           valueFrom: { fieldRef: { apiVersion: v1, fieldPath: metadata.namespace } }
         {{- end }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
       serviceAccount: {{ include "install.serviceAccountName" . }}
