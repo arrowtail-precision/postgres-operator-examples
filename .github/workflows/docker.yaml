@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: postgres-timescale
+  IMAGE_NAME: arrowtail-precision/postgres-timescale
 
 # Docker BuildX caching borrowed from this tutorial;
 # https://evilmartians.com/chronicles/build-images-on-github-actions-with-docker-layer-caching
