@@ -11,8 +11,8 @@ FROM ${REGISTRY}/${IMAGE}:${TAG}
 USER root
 
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
-    microdnf update -y && \
-    microdnf install -y timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} && \
+    microdnf --disablerepo=crunchypg14 update -y && \
+    microdnf --disablerepo=crunchypg14 install -y timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} && \
     curl -sSL -O https://github.com/timescale/promscale_extension/releases/download/${PROMSCALE_VERSION}/promscale_extension-${PROMSCALE_VERSION}.pg${POSTGRES_MAJOR_VERSION}.x86_64.rpm && \
     dnf localinstall -y promscale_extension-${PROMSCALE_VERSION}.pg${POSTGRES_MAJOR_VERSION}.x86_64.rpm && \
     rm promscale_extension-${PROMSCALE_VERSION}.pg${POSTGRES_MAJOR_VERSION}.x86_64.rpm && \
