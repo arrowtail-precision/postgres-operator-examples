@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "Dockerfile"
+      - ".github/workflows/docker.yaml"
 
 jobs:
   release:
