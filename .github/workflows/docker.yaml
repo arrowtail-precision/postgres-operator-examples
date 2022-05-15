@@ -67,7 +67,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          outputs: type=oci,dest=/tmp/image.tar
           build-args: |
             IMAGE=crunchy-postgres
             POSTGRES_MAJOR_VERSION=14
