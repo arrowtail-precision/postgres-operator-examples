@@ -10,7 +10,7 @@ FROM ${REGISTRY}/${IMAGE}:${TAG}
 
 USER root
 
-RUN microdnf config-manager --add-repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
+RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION},appstream,baseos update -y && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION},appstream,baseos install -y timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} && \
     curl -sSL -O https://github.com/timescale/promscale_extension/releases/download/${PROMSCALE_VERSION}/promscale_extension-${PROMSCALE_VERSION}.pg${POSTGRES_MAJOR_VERSION}.x86_64.rpm && \
