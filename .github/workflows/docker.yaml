@@ -71,9 +71,10 @@ jobs:
             IMAGE=crunchy-postgres
             POSTGRES_MAJOR_VERSION=14
             POSTGRES_MINOR_VERSION=4
-            CRUNCHY_IMAGE_VERSION=1
+            CRUNCHY_IMAGE_VERSION=0
             TIMESCALE_VERSION=2.6.1
-            PROMSCALE_VERSION=0.3.0
+            PROMSCALE_VERSION=0.13.0
+          # CHECK THESE VALUES IN THE DOCKERFILE TOO!
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
