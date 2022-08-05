@@ -1,4 +1,4 @@
-name: Release Charts
+name: Helm Charts
 
 on:
   push:
@@ -8,9 +8,16 @@ on:
       - "Dockerfile"
       - ".github/workflows/docker.yaml"
 
+env:
+  REGISTRY: ghcr.io
+  APP_NAME: pgo
+  HELM_OCI_REPO: ghcr.io/${{ github.repository_owner }}
+  HELM_VERSION: 3.9.0
+
 jobs:
-  release:
+  helm:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -22,12 +29,25 @@ jobs:
         run: |
           # run=$(( GITHUB_RUN_NUMBER % 10 ))
           run=${GITHUB_RUN_NUMBER}
-          ts=$(date +%Y.%m%d)
+          # The minus sign in the "%-m" removes the leading zero
+          # otherwise 2022.0101.33 is an invalid semver because of the zero
+          ts=$(date +%Y.%-m%d)
           echo "::set-output name=BUILD_ID::${ts}.${run}"
 
-      - name: Publish Helm Charts
-        uses: stefanprodan/helm-gh-pages@master
+      - name: Install Helm
+        uses: Azure/setup-helm@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          charts_dir: helm
-          chart_version: ${{ steps.calver.outputs.BUILD_ID }}
+          version: ${{ env.HELM_VERSION }}
+
+      - name: Helm Login to GHCR
+        run: |
+          echo ${{ secrets.GITHUB_TOKEN }} | helm registry login ${{ env.HELM_OCI_REPO }} --username ${{ github.repository_owner }} --password-stdin
+
+      - name: Package Helm Chart
+        id: package
+        run: |
+          helm package --destination ${{ github.workspace }} --version ${{ steps.calver.outputs.BUILD_ID }} ${{ github.workspace }}/helm/install
+
+      - name: Publish to GHCR
+        run: |
+          helm push ${{ github.workspace }}/${{ env.APP_NAME }}-${{ steps.calver.outputs.BUILD_ID }}.tgz oci://${{ env.HELM_OCI_REPO }}
