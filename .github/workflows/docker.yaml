@@ -70,9 +70,9 @@ jobs:
           build-args: |
             IMAGE=crunchy-postgres
             POSTGRES_MAJOR_VERSION=14
-            POSTGRES_MINOR_VERSION=2
+            POSTGRES_MINOR_VERSION=4
             CRUNCHY_IMAGE_VERSION=1
-            TIMESCALE_VERSION=2.6.0
+            TIMESCALE_VERSION=2.6.1
             PROMSCALE_VERSION=0.3.0
           push: true
           tags: ${{ steps.meta.outputs.tags }}
