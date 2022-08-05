@@ -2,6 +2,17 @@ apiVersion: v1
 entries:
   pgo:
   - apiVersion: v2
+    appVersion: 5.1.2
+    created: "2022-08-05T00:07:06.786523955Z"
+    description: Installer for PGO, the open source Postgres Operator from Crunchy
+      Data
+    digest: 223b6386cbee40d15f3069040ae3afa898b91908e1420c8517cab8d9798d0f1c
+    name: pgo
+    type: application
+    urls:
+    - https://arrowtail-precision.github.io/postgres-operator-examples/pgo-2022.0805.18.tgz
+    version: 2022.0805.18
+  - apiVersion: v2
     appVersion: 5.1.0
     created: "2022-05-15T03:33:32.469072226Z"
     description: Installer for PGO, the open source Postgres Operator from Crunchy
@@ -97,6 +108,16 @@ entries:
     version: 0.1.0
   postgrescluster:
   - apiVersion: v2
+    appVersion: 5.1.2
+    created: "2022-08-05T00:07:06.787047759Z"
+    description: A Helm chart for Kubernetes
+    digest: 379e0b1f4ef567da5afce087ab1237765b2823c32ce8c360194775f93e8b3b37
+    name: postgrescluster
+    type: application
+    urls:
+    - https://arrowtail-precision.github.io/postgres-operator-examples/postgrescluster-2022.0805.18.tgz
+    version: 2022.0805.18
+  - apiVersion: v2
     appVersion: 5.1.0
     created: "2022-05-15T03:33:32.469539332Z"
     description: A Helm chart for Kubernetes
@@ -186,4 +207,4 @@ entries:
     urls:
     - https://github.com/arrowtail-precision/postgres-operator-examples/releases/download/postgrescluster-0.1.0/postgrescluster-0.1.0.tgz
     version: 0.1.0
-generated: "2022-05-15T03:33:32.465133977Z"
+generated: "2022-08-05T00:07:06.782465217Z"
