@@ -69,6 +69,7 @@ jobs:
             IMAGE=crunchy-postgres-gis
             POSTGRES_MAJOR_VERSION=14
             POSTGRES_MINOR_VERSION=4
+            POSTGIS_VERSION=3.2
             CRUNCHY_IMAGE_VERSION=0
             TIMESCALE_VERSION=2.6.1
             PROMSCALE_EXT_VERSION=0.5.4
