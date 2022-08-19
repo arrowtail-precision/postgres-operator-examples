@@ -66,7 +66,7 @@ jobs:
         with:
           context: .
           build-args: |
-            IMAGE=crunchy-postgres
+            IMAGE=crunchy-postgres-gis
             POSTGRES_MAJOR_VERSION=14
             POSTGRES_MINOR_VERSION=4
             CRUNCHY_IMAGE_VERSION=0
