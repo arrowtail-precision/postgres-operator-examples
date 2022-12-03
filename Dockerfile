@@ -35,7 +35,7 @@ RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packageclo
     curl -sSL -O https://github.com/timescale/promscale_extension/releases/download/${PROMSCALE_EXT_VERSION}/promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     rpm -qpl promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     rm promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
-    rpm postgresql-unit-${POSTGRESQL_UNIT_VERSION} && \
+    microdnf install -y postgresql-unit-${POSTGRESQL_UNIT_VERSION} && \
     microdnf clean all
 
 USER 26
