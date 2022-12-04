@@ -27,6 +27,7 @@ ARG POSTGRESQL_UNIT_VERSION
 USER root
 
 RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} update -y
+RUN microdnf list "*postgre*unit*"
 RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} install -y postgresql-unit-${POSTGRESQL_UNIT_VERSION}
 
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
