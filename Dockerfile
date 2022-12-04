@@ -26,6 +26,7 @@ ARG POSTGRESQL_UNIT_VERSION
 
 USER root
 
+RUN microdnf --version
 RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos --disablerepo=ubi-8-appstream --setopt=install_weak_deps=0 update -y
 RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos --disablerepo=ubi-8-appstream --setopt=install_weak_deps=0 install -y postgresql-unit-${POSTGRESQL_UNIT_VERSION}
 
