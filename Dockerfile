@@ -29,7 +29,7 @@ USER root
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
     curl -sSL -o /etc/yum.repos.d/pgdg-redhat-repo-latest.noarch.rpm https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} update -y
-RUN microdnf repoquery "*unit*"
+RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} repoquery "*unit*"
 RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} install -y \
         postgresql-unit-${POSTGRESQL_UNIT_VERSION}
 RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} install -y \
