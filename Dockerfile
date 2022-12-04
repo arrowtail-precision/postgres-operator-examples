@@ -27,8 +27,9 @@ ARG POSTGRESQL_UNIT_VERSION
 USER root
 
 RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} update -y
-RUN yum install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm && \
-    yum list -a | grep unit
+RUN curl -sSL -O https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm && \
+    rpm -qR postgresql-unit && \
+    rpm -iv pgdg-redhat-repo-latest.noarch.rpm
 RUN yum install postgresql${POSTGRES_MAJOR_VERSION}-unit-${POSTGRESQL_UNIT_VERSION}
 
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
