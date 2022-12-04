@@ -28,10 +28,10 @@ USER root
 
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
     curl -sSL -o /etc/yum.repos.d/pgdg-redhat-repo-latest.noarch.rpm https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm && \
-    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos --disablerepo=ubi-8-appstream --setopt=install_weak_deps=0 update -y
-RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos --disablerepo=ubi-8-appstream --setopt=install_weak_deps=0 install -y \
+    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} update -y
+RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} install -y \
         postgresql${POSTGRES_MAJOR_VERSION}-unit-${POSTGRESQL_UNIT_VERSION}
-RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos --disablerepo=ubi-8-appstream --setopt=install_weak_deps=0 install -y \
+RUN microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} install -y \
         timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} \
         timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} \
         timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION} && \
