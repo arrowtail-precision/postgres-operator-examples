@@ -26,6 +26,10 @@ ARG POSTGRESQL_UNIT_VERSION
 
 USER root
 
+RUN ls -a
+
+RUN pwd
+
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} update -y && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} install -y \
