@@ -26,9 +26,9 @@ ARG POSTGRESQL_UNIT_VERSION
 
 USER root
 
-RUN ls -a
+COPY postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm
 
-RUN pwd
+RUN ls /tmp
 
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} update -y && \
@@ -39,7 +39,7 @@ RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packageclo
     curl -sSL -O https://github.com/timescale/promscale_extension/releases/download/${PROMSCALE_EXT_VERSION}/promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     rpm -qpl promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     rm promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
-    rpm -qpl postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm && \
+    rpm -qpl /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm && \
     microdnf clean all
 
 USER 26
