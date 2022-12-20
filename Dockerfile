@@ -29,8 +29,8 @@ USER root
 COPY postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm
 
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
-    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos --disablerepo=ubi-8-appstream --setopt=install_weak_deps=0 update -y && \
-    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos --disablerepo=ubi-8-appstream --setopt=install_weak_deps=0 install -y \
+    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --setopt=install_weak_deps=0 update -y && \
+    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --setopt=install_weak_deps=0 install -y \
         timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} \
         timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} \
         timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION} && \
