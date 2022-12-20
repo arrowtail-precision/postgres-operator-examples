@@ -41,4 +41,3 @@ RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packageclo
     microdnf clean all
 
 USER 26
-q
