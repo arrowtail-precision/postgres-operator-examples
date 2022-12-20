@@ -34,6 +34,7 @@ RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packageclo
         timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} \
         timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION} \
         timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION} && \
+    timescaledb-tune --pg-config=/usr/pgsql-14/bin/pg_config && \
     curl -sSL -O https://github.com/timescale/promscale_extension/releases/download/${PROMSCALE_EXT_VERSION}/promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     rpm -ivh promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     rm promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
