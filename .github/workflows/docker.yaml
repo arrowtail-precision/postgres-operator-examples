@@ -24,7 +24,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       # This is the a separate action that sets up buildx runner
       - name: Set up Docker Buildx
@@ -40,7 +40,7 @@ jobs:
             ${{ runner.os }}-buildx-
 
       - name: Log in to ghcr
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
@@ -54,7 +54,7 @@ jobs:
       # type=raw,value={{date 'YYYY.MM.DD'}}-${{ github.run_number % 10 }}
       - name: Docker Metadata
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -62,7 +62,7 @@ jobs:
 
       # And make it available for the builds
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           build-args: |
