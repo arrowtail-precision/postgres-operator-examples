@@ -10,7 +10,7 @@ ARG TIMESCALE_VERSION=2.6.1
 ARG TIMESCALE_TOOLKIT_VERSION=1.13.1
 # NOT Promscale itself; see here; https://github.com/timescale/promscale_extension/releases
 ARG PROMSCALE_EXT_VERSION=0.7.0
-ARG POSTGRESQL_UNIT_VERSION=7.5-3
+ARG POSTGRESQL_UNIT_VERSION=7.4-1
 ARG TAG=ubi8-${POSTGRES_MAJOR_VERSION}.${POSTGRES_MINOR_VERSION}-${POSTGIS_VERSION}-${CRUNCHY_IMAGE_VERSION}
 
 # Find CrunchyData image versions here;
@@ -37,7 +37,7 @@ RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packageclo
         https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 update -y && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 install -y \
-        postgresql-15-unit && \
+        postgresql-unit_${POSTGRES_MAJOR_VERSION}-${POSTGRESQL_UNIT_VERSION}.rhel8.x86_64.rpm && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 install -y \
         timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
         timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \

@@ -74,7 +74,7 @@ jobs:
             TIMESCALE_VERSION=2.6.1
             TIMESCALE_TOOLKIT_VERSION=1.13.1
             PROMSCALE_EXT_VERSION=0.7.0
-            POSTGRESQL_UNIT_VERSION=7.5-3
+            POSTGRESQL_UNIT_VERSION=7.4-1
           # CHECK THESE VALUES IN THE DOCKERFILE TOO!
           push: true
           tags: ${{ steps.meta.outputs.tags }}
