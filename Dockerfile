@@ -31,12 +31,12 @@ USER root
 COPY postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm
 
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
-    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --setopt=install_weak_deps=0 update -y && \
-    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --setopt=install_weak_deps=0 install -y \
+    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 update -y && \
+    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 install -y \
         timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
         timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
-        timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_TOOLKIT_VERSION}-0.x86_64 \
-        promscale-extension-postgresql-${POSTGRES_MAJOR_VERSION}-${PROMSCALE_EXT_VERSION}-1.x86_64 && \
+        timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_TOOLKIT_VERSION}-0.x86_64 && \
+        # promscale-extension-postgresql-${POSTGRES_MAJOR_VERSION}-${PROMSCALE_EXT_VERSION}-1.x86_64 && \
     # curl -sSL -O https://github.com/timescale/promscale_extension/releases/download/${PROMSCALE_EXT_VERSION}/promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     # rpm -ivh promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     # rm promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
