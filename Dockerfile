@@ -28,21 +28,22 @@ ARG POSTGRESQL_UNIT_VERSION
 
 USER root
 
-COPY postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm
+# COPY postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm
 
-RUN rpm -qpi postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm | head -1
+# RUN rpm -qpi /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm | head -1
 
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 update -y && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 install -y \
         timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
         timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
-        timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_TOOLKIT_VERSION}-0.x86_64 && \
+        timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_TOOLKIT_VERSION}-0.x86_64 \
+        http://deb.debian.org/debian/pool/main/p/postgresql-unit/postgresql-unit_7.7.orig.tar.gz && \
         # promscale-extension-postgresql-${POSTGRES_MAJOR_VERSION}-${PROMSCALE_EXT_VERSION}-1.x86_64 && \
     # curl -sSL -O https://github.com/timescale/promscale_extension/releases/download/${PROMSCALE_EXT_VERSION}/promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     # rpm -ivh promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
     # rm promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
-    rpm -ivh --prefix=/usr/pgsql-14/share/extension /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm && \
+    # rpm -ivh --prefix=/usr/pgsql-14/share/extension /tmp/postgresql-15-unit-${POSTGRESQL_UNIT_VERSION}.x86_64.rpm && \
     microdnf clean all
 
 USER 26
