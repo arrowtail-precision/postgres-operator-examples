@@ -6,10 +6,10 @@ ARG POSTGRES_MAJOR_VERSION=14
 ARG POSTGRES_MINOR_VERSION=6
 ARG POSTGIS_VERSION=3.3
 ARG CRUNCHY_IMAGE_VERSION=2
-ARG TIMESCALE_VERSION=2.6.1
+ARG TIMESCALE_VERSION=2.9.3
 ARG TIMESCALE_TOOLKIT_VERSION=1.13.1
 # NOT Promscale itself; see here; https://github.com/timescale/promscale_extension/releases
-ARG PROMSCALE_EXT_VERSION=0.7.0
+ARG PROMSCALE_EXT_VERSION=0.8.0
 ARG POSTGRESQL_UNIT_VERSION=7.4-1
 ARG TAG=ubi8-${POSTGRES_MAJOR_VERSION}.${POSTGRES_MINOR_VERSION}-${POSTGIS_VERSION}-${CRUNCHY_IMAGE_VERSION}
 
@@ -33,16 +33,12 @@ RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packageclo
     rpm -ivh /tmp/pgdg-redhat-repo-latest.noarch.rpm && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=pgdg-common --disablerepo=pgdg14 --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 update -y && \
     microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 install -y \
-        postgresql-unit_${POSTGRES_MAJOR_VERSION}-${POSTGRESQL_UNIT_VERSION}.rhel8.x86_64 && \
-    microdnf --disablerepo=crunchypg${POSTGRES_MAJOR_VERSION} --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 install -y \
+        postgresql-unit_${POSTGRES_MAJOR_VERSION}-${POSTGRESQL_UNIT_VERSION}.rhel8.x86_64 \
         timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
         timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
-        timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_TOOLKIT_VERSION}-0.x86_64 && \
-        # promscale-extension-postgresql-${POSTGRES_MAJOR_VERSION}-${PROMSCALE_EXT_VERSION}-1.x86_64 && \
-    # curl -sSL -O https://github.com/timescale/promscale_extension/releases/download/${PROMSCALE_EXT_VERSION}/promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
-    # rpm -ivh promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
-    # rm promscale-extension-${PROMSCALE_EXT_VERSION}.pg${POSTGRES_MAJOR_VERSION}.centos7.x86_64.rpm && \
-    rm tmp/pgdg-redhat-repo-latest.noarch.rpm && \
+        timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_TOOLKIT_VERSION}-0.x86_64 \
+        promscale-extension-postgresql-${POSTGRES_MAJOR_VERSION}-${PROMSCALE_EXT_VERSION}-1.x86_64 && \
+    rm /tmp/pgdg-redhat-repo-latest.noarch.rpm && \
     microdnf clean all
 
 USER 26
