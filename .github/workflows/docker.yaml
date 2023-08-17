@@ -67,13 +67,12 @@ jobs:
           context: .
           build-args: |
             IMAGE=crunchy-postgres-gis
-            POSTGRES_MAJOR_VERSION=14
-            POSTGRES_MINOR_VERSION=7
+            POSTGRES_MAJOR_VERSION=15
+            POSTGRES_MINOR_VERSION=3
             POSTGIS_VERSION=3.3
-            CRUNCHY_IMAGE_VERSION=0
-            TIMESCALE_VERSION=2.9.2
-            TIMESCALE_TOOLKIT_VERSION=1.15.0
-            PROMSCALE_EXT_VERSION=0.8.0
+            CRUNCHY_IMAGE_VERSION=3
+            TIMESCALE_VERSION=2.10.3
+            TIMESCALE_TOOLKIT_VERSION=1.17.0
             POSTGRESQL_UNIT_VERSION=7.4-1
           # CHECK THESE VALUES IN THE DOCKERFILE TOO!
           push: true
