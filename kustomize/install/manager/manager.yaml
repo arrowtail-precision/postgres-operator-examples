@@ -10,39 +10,41 @@ spec:
     spec:
       serviceAccountName: pgo
       containers:
-      - name: operator
-        image: postgres-operator
-        env:
-        - name: PGO_NAMESPACE
-          valueFrom: { fieldRef: { fieldPath: metadata.namespace } }
-        - name: CRUNCHY_DEBUG
-          value: "true"
-        - name: RELATED_IMAGE_POSTGRES_15
-          value: image-crunchy-postgres-15
-        - name: RELATED_IMAGE_POSTGRES_15_GIS_3.3
-          value: image-crunchy-postgres-15-gis-3.3
-        - name: RELATED_IMAGE_POSTGRES_16
-          value: image-crunchy-postgres-16
-        - name: RELATED_IMAGE_POSTGRES_16_GIS_3.3
-          value: image-crunchy-postgres-16-gis-3.3
-        - name: RELATED_IMAGE_POSTGRES_16_GIS_3.4
-          value: image-crunchy-postgres-16-gis-3.4
-        - name: RELATED_IMAGE_PGADMIN
-          value: image-pgadmin-v4
-        - name: RELATED_IMAGE_PGBACKREST
-          value: image-pgbackrest
-        - name: RELATED_IMAGE_PGBOUNCER
-          value: image-pgbouncer
-        - name: RELATED_IMAGE_PGEXPORTER
-          value: image-postgres-exporter
-        - name: RELATED_IMAGE_PGUPGRADE
-          value: image-crunchy-upgrade
-        - name: RELATED_IMAGE_STANDALONE_PGADMIN
-          value: image-pgadmin
-        securityContext:
-          seccompProfile:
-            type: RuntimeDefault
-          allowPrivilegeEscalation: false
-          capabilities: { drop: [ALL] }
-          readOnlyRootFilesystem: true
-          runAsNonRoot: true
+        - name: operator
+          image: postgres-operator
+          env:
+            - name: PGO_NAMESPACE
+              valueFrom: { fieldRef: { fieldPath: metadata.namespace } }
+            - name: PGO_FEATURE_GATES
+              value: "InstanceSidecars=true"
+            - name: CRUNCHY_DEBUG
+              value: "true"
+            - name: RELATED_IMAGE_POSTGRES_15
+              value: image-crunchy-postgres-15
+            - name: RELATED_IMAGE_POSTGRES_15_GIS_3.3
+              value: image-crunchy-postgres-15-gis-3.3
+            - name: RELATED_IMAGE_POSTGRES_16
+              value: image-crunchy-postgres-16
+            - name: RELATED_IMAGE_POSTGRES_16_GIS_3.3
+              value: image-crunchy-postgres-16-gis-3.3
+            - name: RELATED_IMAGE_POSTGRES_16_GIS_3.4
+              value: image-crunchy-postgres-16-gis-3.4
+            - name: RELATED_IMAGE_PGADMIN
+              value: image-pgadmin-v4
+            - name: RELATED_IMAGE_PGBACKREST
+              value: image-pgbackrest
+            - name: RELATED_IMAGE_PGBOUNCER
+              value: image-pgbouncer
+            - name: RELATED_IMAGE_PGEXPORTER
+              value: image-postgres-exporter
+            - name: RELATED_IMAGE_PGUPGRADE
+              value: image-crunchy-upgrade
+            - name: RELATED_IMAGE_STANDALONE_PGADMIN
+              value: image-pgadmin
+          securityContext:
+            seccompProfile:
+              type: RuntimeDefault
+            allowPrivilegeEscalation: false
+            capabilities: { drop: [ALL] }
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
