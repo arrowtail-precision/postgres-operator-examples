@@ -3,7 +3,7 @@ name: docker
 on:
   push:
     branches:
-      - "main"
+      - "postgres-17"
     paths:
       - "Dockerfile"
       - ".github/workflows/docker.yaml"
@@ -58,7 +58,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value={{date 'YYYY.MDD'}}.${{ github.run_number }}
+            type=raw,value={{date 'YYYY.MDD'}}.${{ github.run_number }}-postgres-17
 
       # And make it available for the builds
       - name: Build and push
