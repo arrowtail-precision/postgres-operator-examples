@@ -6,7 +6,7 @@ ARG POSTGRES_MAJOR_VERSION=17
 ARG POSTGRES_MINOR_VERSION=2
 ARG POSTGIS_VERSION=3.4
 ARG CRUNCHY_IMAGE_VERSION=0
-ARG TIMESCALE_VERSION=2.10.3
+ARG TIMESCALE_VERSION=2.17.2
 ARG TIMESCALE_TOOLKIT_VERSION=1.19.0
 ARG POSTGRESQL_UNIT_VERSION=7.9-1PGDG
 ARG TAG=ubi8-${POSTGRES_MAJOR_VERSION}.${POSTGRES_MINOR_VERSION}-${POSTGIS_VERSION}-${CRUNCHY_IMAGE_VERSION}
@@ -28,10 +28,10 @@ USER root
 RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
     curl -sSL -o /tmp/pgdg-redhat-repo-latest.noarch.rpm "https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm" && \
     rpm -ivh /tmp/pgdg-redhat-repo-latest.noarch.rpm && \
-    microdnf --disablerepo=pgdg-common --disablerepo=pgdg17 --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 update -y && \
+    microdnf --disablerepo=pgdg-common --disablerepo=pgdg15 --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 update -y && \
     microdnf --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 install -y \
         postgresql-unit_${POSTGRES_MAJOR_VERSION}-${POSTGRESQL_UNIT_VERSION}.rhel8.x86_64 \
-        timescaledb-2-postgresql-15-${TIMESCALE_VERSION}-0.el8.x86_64  && \
+        timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64  && \
     rm /tmp/pgdg-redhat-repo-latest.noarch.rpm && \
     microdnf clean all
 
