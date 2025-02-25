@@ -31,7 +31,9 @@ RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packageclo
     microdnf --disablerepo=pgdg-common --disablerepo=pgdg15 --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 update -y && \
     microdnf --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 install -y \
         postgresql-unit_${POSTGRES_MAJOR_VERSION}-${POSTGRESQL_UNIT_VERSION}.rhel8.x86_64 \
-        timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64  && \
+        timescaledb-2-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
+        timescaledb-2-loader-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_VERSION}-0.el8.x86_64 \
+        timescaledb-toolkit-postgresql-${POSTGRES_MAJOR_VERSION}-${TIMESCALE_TOOLKIT_VERSION}-0.x86_64 && \
     rm /tmp/pgdg-redhat-repo-latest.noarch.rpm && \
     microdnf clean all
 
