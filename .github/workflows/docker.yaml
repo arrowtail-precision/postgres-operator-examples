@@ -73,7 +73,7 @@ jobs:
             CRUNCHY_IMAGE_VERSION=0
             TIMESCALE_VERSION=2.17.2
             TIMESCALE_TOOLKIT_VERSION=1.19.0
-            POSTGRESQL_UNIT_VERSION=7.9-1PGDG
+            POSTGRESQL_UNIT_VERSION=7.10-1PGDG
           # CHECK THESE VALUES IN THE DOCKERFILE TOO!
           push: true
           tags: ${{ steps.meta.outputs.tags }}
