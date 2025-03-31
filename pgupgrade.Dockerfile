@@ -1,5 +1,5 @@
 # These values will be overriden by the values passed in from
-# the Github Actions workflow file.#
+# the Github Actions workflow file.
 ARG REGISTRY=registry.developers.crunchydata.com/crunchydata
 ARG IMAGE=crunchy-upgrade
 ARG POSTGRES_MAJOR_VERSION=17
