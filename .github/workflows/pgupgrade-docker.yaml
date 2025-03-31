@@ -5,7 +5,7 @@ on:
     branches:
       - "postgres-17"
     paths:
-      - "Dockerfile"
+      - "pgupgrade.Dockerfile"
       - ".github/workflows/pgupgrade.docker.yaml"
 
 env:
