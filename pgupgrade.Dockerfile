@@ -25,7 +25,7 @@ ARG POSTGRESQL_UNIT_VERSION
 
 USER root
 
-# RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
+RUN curl -sSL -o /etc/yum.repos.d/timescale_timescaledb.repo "https://packagecloud.io/install/repositories/timescale/timescaledb/config_file.repo?os=el&dist=8" && \
 RUN curl -sSL -o /tmp/pgdg-redhat-repo-latest.noarch.rpm "https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm" && \
     rpm -ivh /tmp/pgdg-redhat-repo-latest.noarch.rpm && \
     microdnf --disablerepo=pgdg-common --disablerepo=pgdg15 --disablerepo=ubi-8-baseos-rpms --disablerepo=ubi-8-appstream-rpms --setopt=install_weak_deps=0 update -y && \
