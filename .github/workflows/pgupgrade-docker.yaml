@@ -65,15 +65,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          build-args: |
-            IMAGE=crunchy-upgrade
-            POSTGRES_MAJOR_VERSION=16
-            POSTGRES_MINOR_VERSION=4
-            POSTGIS_VERSION=3.3
-            CRUNCHY_IMAGE_VERSION=0
-            TIMESCALE_VERSION=2.16.1
-            TIMESCALE_TOOLKIT_VERSION=1.18.0
-            POSTGRESQL_UNIT_VERSION=7.9-1PGDG
+          file: pgupgrade.Dockerfile
           # CHECK THESE VALUES IN THE DOCKERFILE TOO!
           push: true
           tags: ${{ steps.meta.outputs.tags }}
