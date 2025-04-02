@@ -11,7 +11,7 @@ ARG TIMESCALE_TOOLKIT_VERSION=1.19.0
 ARG POSTGRESQL_UNIT_VERSION=7.10-1PGDG
 ARG TAG=ubi8-${POSTGRES_MAJOR_VERSION}.${POSTGRES_MINOR_VERSION}-${POSTGIS_VERSION}-${CRUNCHY_IMAGE_VERSION}
 
-# Find CrunchyData image versions here;
+# Find CrunchyData image versions here;#
 # https://www.crunchydata.com/developers/download-postgres/containers/postgresql15
 FROM ${REGISTRY}/${IMAGE}:${TAG}
 
