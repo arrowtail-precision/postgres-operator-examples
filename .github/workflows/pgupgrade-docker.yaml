@@ -58,7 +58,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value={{date 'YYYY.MDD'}}.${{ github.run_number }}-postgres-17
+            type=raw,value={{date 'YYYY.MDD'}}.${{ github.run_number }}-postgres-16
 
       # And make it available for the builds
       - name: Build and push
