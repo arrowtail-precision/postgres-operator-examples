@@ -1,21 +1,16 @@
-# These values will be overriden by the values passed in from
-# the Github Actions workflow file.
+# Intermediate PostgreSQL 16 image with OLD TimescaleDB version for upgrade compatibility
 ARG REGISTRY=registry.developers.crunchydata.com/crunchydata
 ARG IMAGE=crunchy-postgres-gis
 ARG POSTGRES_MAJOR_VERSION=16
 ARG POSTGRES_MINOR_VERSION=4
 ARG POSTGIS_VERSION=3.3
 ARG CRUNCHY_IMAGE_VERSION=0
-ARG TIMESCALE_VERSION=2.16.1
-ARG TIMESCALE_TOOLKIT_VERSION=1.18.0
-# error: No package matches 'postgresql-unit_16-7.9-1.rhel8.x86_64'
-# the available version is postgresql-unit_16-7.9-1PGDG.rhel8.x86_64.rpm
-# Therefore changing 7.91-1 to 7.9-1PGDG
+# IMPORTANT: Using the SAME TimescaleDB version as PostgreSQL 15
+ARG TIMESCALE_VERSION=2.10.3
+ARG TIMESCALE_TOOLKIT_VERSION=1.17.0
 ARG POSTGRESQL_UNIT_VERSION=7.9-1PGDG
 ARG TAG=ubi8-${POSTGRES_MAJOR_VERSION}.${POSTGRES_MINOR_VERSION}-${POSTGIS_VERSION}-${CRUNCHY_IMAGE_VERSION}
 
-# Find CrunchyData image versions here;
-# https://www.crunchydata.com/developers/download-postgres/containers/postgresql15
 FROM ${REGISTRY}/${IMAGE}:${TAG}
 
 ARG POSTGRES_MAJOR_VERSION
