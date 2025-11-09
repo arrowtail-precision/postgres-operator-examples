@@ -3,7 +3,7 @@ name: Helm Charts
 on:
   push:
     branches:
-      - postgres-17
+      - postgres-18
     paths-ignore:
       - "Dockerfile"
       - ".github/workflows/docker.yaml"
@@ -32,7 +32,7 @@ jobs:
           # The minus sign in the "%-m" removes the leading zero
           # otherwise 2022.0101.33 is an invalid semver because of the zero
           ts=$(date +%Y.%-m%d)
-          echo "::set-output name=BUILD_ID::${ts}.${run}-postgres-17"
+          echo "::set-output name=BUILD_ID::${ts}.${run}-postgres-18"
 
       - name: Install Helm
         uses: Azure/setup-helm@v3

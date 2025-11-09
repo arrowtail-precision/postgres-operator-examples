@@ -3,7 +3,7 @@ name: docker
 on:
   push:
     branches:
-      - "postgres-17"
+      - "postgres-18"
     paths:
       - "Dockerfile"
       - ".github/workflows/docker.yaml"
@@ -58,7 +58,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value={{date 'YYYY.MDD'}}.${{ github.run_number }}-postgres-17
+            type=raw,value={{date 'YYYY.MDD'}}.${{ github.run_number }}-postgres-18
 
       # And make it available for the builds
       - name: Build and push
@@ -67,13 +67,13 @@ jobs:
           context: .
           build-args: |
             IMAGE=crunchy-postgres-gis
-            POSTGRES_MAJOR_VERSION=17
-            POSTGRES_MINOR_VERSION=2
-            POSTGIS_VERSION=3.4
+            POSTGRES_MAJOR_VERSION=18
+            POSTGRES_MINOR_VERSION=0
+            POSTGIS_VERSION=3.6
             CRUNCHY_IMAGE_VERSION=0
-            TIMESCALE_VERSION=2.17.2
-            TIMESCALE_TOOLKIT_VERSION=1.19.0
-            POSTGRESQL_UNIT_VERSION=7.10-1PGDG
+            TIMESCALE_VERSION=2.23.0
+            TIMESCALE_TOOLKIT_VERSION=1.22.0
+            POSTGRESQL_UNIT_VERSION=7.10-4PGDG
           # CHECK THESE VALUES IN THE DOCKERFILE TOO!
           push: true
           tags: ${{ steps.meta.outputs.tags }}
