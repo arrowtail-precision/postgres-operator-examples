@@ -68,9 +68,9 @@ jobs:
           build-args: |
             IMAGE=crunchy-postgres-gis
             POSTGRES_MAJOR_VERSION=18
-            POSTGRES_MINOR_VERSION=0
+            POSTGRES_MINOR_VERSION=1
             POSTGIS_VERSION=3.6
-            CRUNCHY_IMAGE_VERSION=2542
+            CRUNCHY_IMAGE_VERSION=2547
             TIMESCALE_VERSION=2.23.0
             TIMESCALE_TOOLKIT_VERSION=1.22.0
             POSTGRESQL_UNIT_VERSION=7.10-4PGDG
