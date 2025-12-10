@@ -28,8 +28,6 @@ spec:
             value: helm
           - name: PGO_INSTALLER_ORIGIN
             value: examples-repo
-          - name: PGO_FEATURE_GATES
-            value: "InstanceSidecars=true"
           - name: PGO_CONTROLLER_LEASE_NAME
             value: {{ .Values.pgoControllerLeaseName }}
         {{- if .Values.envOverride }}
